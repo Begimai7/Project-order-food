@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/Project-order-food/static/css/main.bdb34b94.css",
+    "main.js": "/Project-order-food/static/js/main.3acd001c.js",
+    "static/media/summery-background.jpg": "/Project-order-food/static/media/summery-background.9cd89fcc34ea3203527b.jpg",
+    "static/media/basket-icon.svg": "/Project-order-food/static/media/basket-icon.67746d4d2575a7810613de994c65f427.svg",
+    "index.html": "/Project-order-food/index.html",
+    "static/media/plus-add.svg": "/Project-order-food/static/media/plus-add.05d9eeabf7804fabf3526a8f976f9d1f.svg",
+    "main.bdb34b94.css.map": "/Project-order-food/static/css/main.bdb34b94.css.map",
+    "main.3acd001c.js.map": "/Project-order-food/static/js/main.3acd001c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.bdb34b94.css",
+    "static/js/main.3acd001c.js"
+  ]
+}
