@@ -5,7 +5,6 @@ import { Meals } from "./components/meal/Meal"
 import { Basket } from "./components/basket/Basket"
 import styled from 'styled-components';
 
-
 function App() {
   return (
    <div>
