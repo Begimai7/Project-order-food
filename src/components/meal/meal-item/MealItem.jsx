@@ -13,7 +13,10 @@ export const MealItem = ({ title, description, price, id}) => {
       </StyledMealInfo>
 
       <div>
-      <MealItemForm id={id}/>
+      <MealItemForm 
+       title={title}
+       price={price}
+       id={id}/>
       </div>
     </ListContainer>
   )

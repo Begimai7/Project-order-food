@@ -1,10 +1,7 @@
-import React from 'react'
 import styled from 'styled-components'
 import { Button } from '../UI/Button'
-import { ReactComponent as MinusIcon} from '../../assets/icons/minus-icon.svg'
-import { ReactComponent as PlusIcon } from '../../assets/icons/plus-icon.svg'
 
-export const BasketItem = ({title, price, amount}) => {
+export const BasketItem = ({title, price, amount, decrementAmount, incrementAmount}) => {
 
   return (
     <Container>
@@ -17,8 +14,8 @@ export const BasketItem = ({title, price, amount}) => {
      </PriceAndAmountContainer>
 
      <ButtonsContainer>
-      <Button borderSquare='square' variant='outline'> <MinusIcon/> </Button>
-      <Button borderSquare='square' variant='outline'> <PlusIcon/></Button>
+      <Button borderSquare='square' variant='outline' onClick={decrementAmount}> - </Button>
+      <Button borderSquare='square' variant='outline' onClick={incrementAmount}> +</Button>
      </ButtonsContainer>
 
      </Content>

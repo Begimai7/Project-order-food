@@ -1,47 +1,43 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { BasketContext } from '../../store/BasketContext'
 import { Modal } from '../UI/Modal'
 import { BasketItem } from './BasketItem'
 import { TotalAmount } from './TotalAmount'
 
-export const Basket = () => {
-  const DUMMY_MEALS = [
-    {
-      id: "meal1",
-      title: "Sushi",
-      amount: 3,
-      price: 22.99
-    },
-    {
-      id: "meal2",
-      title: "Schnitzel",
-      amount: 3,
-      price: 16.00
-    },
-    {
-      id: "meal3",
-      title: "Barbecue Burger",
-      amount: 3,
-      price: 12.99
-    },
-    {
-      id: "meal4",
-      title: "Green Bowl",
-      amount: 3,
-      price: 19.99
-    }
-  ]
+export const Basket = ({onClose}) => {
+const { items, updateBasketItem, deleteBasketItem } = useContext(BasketContext)
+
+const getTotalPrice = () => {
+  return items.reduce((sum, {amount, price}) => sum + price * amount, 0)
+}
+
+const decrementAmount = (id, amount) => {
+ if(amount > 1){
+   updateBasketItem({amount: amount - 1, id})
+ }else{
+  deleteBasketItem(id)
+ }
+}
+const incrementAmount = (id, amount) => {
+ updateBasketItem({amount: amount + 1, id})
+
+}
+
 
   return (
     <Modal>
       {
-        DUMMY_MEALS.length ? <MapItems>
+        items.length ? <MapItems>
        {
-        DUMMY_MEALS.map((elem) => (
+        items.map((elem) => (
           <BasketItem 
-       title={elem.title}
-       price= {elem.price}
-       amount = {elem.amount}
+          key={elem._id}
+          title={elem.title}
+          price= {elem.price}
+          amount = {elem.amount}
+          decrementAmount={() => decrementAmount(elem._id, elem.amount)}
+          incrementAmount={() => incrementAmount(elem._id, elem.amount)}
       />
         ))}
     </MapItems> : null
@@ -51,8 +47,8 @@ export const Basket = () => {
 
       <StyledTotalAmount>
        <TotalAmount
-        price={10}
-        onClose ={(() => {})}
+        price={getTotalPrice()}
+        onClose ={onClose}
         onOrder ={(() => {})}
        /> 
       </StyledTotalAmount>

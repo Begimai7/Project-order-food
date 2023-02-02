@@ -7,7 +7,7 @@ export const TotalAmount = ({price, onClose, onOrder}) => {
  const orderButton = price > 0 && <Button onClick={onOrder}>Order</Button>
 
   return (
-    <TotalAmountStyle>
+    <TotalAmountStyled>
  
     <TotalContainer>
     <Label>Total Amount</Label>
@@ -19,7 +19,7 @@ export const TotalAmount = ({price, onClose, onOrder}) => {
      {orderButton}
      </StyledButtons>
 
-    </TotalAmountStyle>
+    </TotalAmountStyled>
   )
 }
 

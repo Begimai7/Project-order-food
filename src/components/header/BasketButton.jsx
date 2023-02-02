@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import {ReactComponent as BasketIcon} from "../../assets/icons/basket-icon.svg" 
 
 
-export const BasketButton = ({count}) => {
+export const BasketButton = ({count , onClick}) => {
   return (
-    <StyledButton>
+    <StyledButton onClick={onClick}>
       <BasketIcon />
          <StyledTitle>Your Card</StyledTitle>
          <StyledCounter>{count || 0}</StyledCounter>
@@ -28,6 +28,29 @@ align-items: center;
 :hover{
  background-color: #2c0d00;
 }
+
+&.bump {
+  animation: bump 300ms ease-out;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(0.9);
+  }
+  30% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 `
 const StyledTitle = styled.span`
 padding-left: 14px;

@@ -1,18 +1,46 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useState} from 'react'
 import styled from 'styled-components'
 import { Button } from '../../UI/Button'
-import { ReactComponent as PlusIcon } from '../../../assets/icons/plus-add.svg'
+import { ReactComponent as AddIcon } from '../../../assets/icons/plus-add.svg'
+import { BasketContext } from '../../../store/BasketContext'
 
 
-export const MealItemForm = ({id}) => {
+export const MealItemForm = ({id, title, price}) => {
+const {addToBasket} = useContext(BasketContext)
+ const [amount, setAmount] = useState(1)
+
+ const getAmount = (e) => {
+  e.preventDefault()
+  setAmount(+e.target.value)
+ }
+
+ const submitMeals = () => {
+  const basketItem = {
+    id,
+    title, 
+    price, 
+    amount
+  }
+  addToBasket(basketItem)
+  console.log(basketItem);
+ }
+
   return (
-   <FormContainer>
+   <FormContainer onSubmit={submitMeals}>
    <Form>
     <label htmlFor={id}>Amount</label>
-     <StyledInput type="number" min={1} defaultValue={1} id={id} />
+     <StyledInput
+      type="number" 
+      min={1}
+      defaultValue={1} 
+      id={id}
+      value={amount}
+      onChange={getAmount}
+      />
    </Form>
  
-        <Button>
+        <Button onClick={submitMeals}>
         <StyledIcon/>
      Add</Button>
    
@@ -51,6 +79,6 @@ line-height: 24px;
 color: #222222;
 outline: none;
 `
-const StyledIcon =  styled(PlusIcon)`
+const StyledIcon =  styled(AddIcon)`
 margin-right: 20px;
 `

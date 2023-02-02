@@ -2,9 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-export const Button = ({children, variant = "contained", borderSquare = "circle"}) => {
+export const Button = ({children, variant = "contained", borderSquare = "circle", ...rest}) => {
   return (
-    <StyledButton borderSquare={borderSquare} variant={variant}>{children}</StyledButton>
+    <StyledButton 
+    {...rest} 
+    borderSquare={borderSquare}
+    variant={variant}>{children}
+    </StyledButton>
   )
 }
 
