@@ -1,80 +1,80 @@
-import { createContext, useEffect, useState } from "react";
-import { fetchApi } from "../lib/fetchApi";
+// import { createContext, useEffect, useState } from "react";
+// import { fetchApi } from "../lib/fetchApi";
 
-export const BasketContext = createContext({
- items: []
-})
+// export const BasketContext = createContext({
+//  items: []
+// })
 
-export const BasketProvider = ({children}) => {
+// export const BasketProvider = ({children}) => {
 
- const [items, setItems] = useState([])
+//  const [items, setItems] = useState([])
 // --------------------------------------------------
- const updateBasketItem = async({id, amount}) => {
-  try{
-  const {data} = await fetchApi(`basketItem/${id}/update`, {
-    method: 'PUT',
-    body: {amount}
-    })
+//  const updateBasketItem = async({id, amount}) => {
+//   try{
+//   const {data} = await fetchApi(`basketItem/${id}/update`, {
+//     method: 'PUT',
+//     body: {amount}
+//     })
 
-    setItems(data.items)
-  }catch(error) {
-    console.log(error);
-  }
- }
+//     setItems(data.items)
+//   }catch(error) {
+//     console.log(error);
+//   }
+//  }
 
 // -----------------------------------------------
-const deleteBasketItem = async(id) => {
-  try{
-  const {data} = await fetchApi(`basketItem/${id}/delete`, {
-    method: 'DELETE',
-    })
+// const deleteBasketItem = async(id) => {
+//   try{
+//   const {data} = await fetchApi(`basketItem/${id}/delete`, {
+//     method: 'DELETE',
+//     })
 
-    setItems(data.items)
-  }catch(error) {
-    console.log(error);
-  }
- }
+//     setItems(data.items)
+//   }catch(error) {
+//     console.log(error);
+//   }
+//  }
 // -----------------------------------------------
-  const getBasket = async () => {
-    try{
-      const {data} = await fetchApi("basket")
-      setItems(data.items)
-    }
-    catch(error){
-      console.log(error);
-    }
-  };
+  // const getBasket = async () => {
+  //   try{
+  //     const {data} = await fetchApi("basket")
+  //     setItems(data.items)
+  //   }
+  //   catch(error){
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getBasket()
-  }, [])
+  // useEffect(() => {
+  //   getBasket()
+  // }, [])
 
 
- const addToBasket = async(newItem) => {
+//  const addToBasket = async(newItem) => {
 
-  try{
-    const response = await fetchApi(`foods/${newItem.id}/addToBasket`,{
-    method: "POST",
-    body: {amount: newItem.amount}
-  })
+//   try{
+//     const response = await fetchApi(`foods/${newItem.id}/addToBasket`,{
+//     method: "POST",
+//     body: {amount: newItem.amount}
+//   })
 
-  setItems(response.data.items)
-  // getBasket()
+//   setItems(response.data.items)
+//   // getBasket()
 
-  }catch(error){
-    console.log(error);
-  }
- }
- useEffect(()=> {
-  addToBasket()
- }, [])
+//   }catch(error){
+//     console.log(error);
+//   }
+//  }
+//  useEffect(()=> {
+//   addToBasket()
+//  }, [])
 
- const state = {
-  items,
-  addToBasket,
-  updateBasketItem,
-  deleteBasketItem
- }
+//  const state = {
+//   items,
+//   addToBasket,
+//   updateBasketItem,
+//   deleteBasketItem
+//  }
 
- return <BasketContext.Provider value={state}>{children}</BasketContext.Provider>
-}
+//  return <BasketContext.Provider value={state}>{children}</BasketContext.Provider>
+// }

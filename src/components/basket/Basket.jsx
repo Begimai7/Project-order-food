@@ -1,30 +1,28 @@
-import React, { useContext } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { BasketContext } from '../../store/BasketContext'
+import { deleteBasketItem, updateBasketItem } from '../../store/basket/basketReducer'
 import { Modal } from '../UI/Modal'
 import { BasketItem } from './BasketItem'
 import { TotalAmount } from './TotalAmount'
 
 export const Basket = ({onClose}) => {
-const { items, updateBasketItem, deleteBasketItem } = useContext(BasketContext)
-
+const dispatch = useDispatch()
+const  items = useSelector((state) => state.basket.items)
 const getTotalPrice = () => {
+  
   return items.reduce((sum, {amount, price}) => sum + price * amount, 0)
 }
 
 const decrementAmount = (id, amount) => {
  if(amount > 1){
-   updateBasketItem({amount: amount - 1, id})
+   dispatch(updateBasketItem({amount: amount - 1, id}))
  }else{
-  deleteBasketItem(id)
+  dispatch(deleteBasketItem(id))
  }
 }
 const incrementAmount = (id, amount) => {
- updateBasketItem({amount: amount + 1, id})
-
+  dispatch(updateBasketItem({amount: amount + 1, id}))
 }
-
-
   return (
     <Modal>
       {
