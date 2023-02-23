@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { getMeals } from "../store/meals/mealsReducer"
+import { getMeals } from "../store/meals/mealsSlice"
 
 export const useFoods =  () => {
  const dispatch = useDispatch()

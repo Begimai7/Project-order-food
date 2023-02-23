@@ -3,9 +3,8 @@ import { useState} from 'react'
 import styled from 'styled-components'
 import { Button } from '../../UI/Button'
 import { ReactComponent as AddIcon } from '../../../assets/icons/plus-add.svg'
-import { BasketContext } from '../../../store/BasketContext'
 import { useDispatch } from 'react-redux'
-import { addToBasket } from '../../../store/basket/basketReducer'
+import { addToBasket } from '../../../store/basket/basketSlice'
 
 
 export const MealItemForm = ({id, title, price}) => {

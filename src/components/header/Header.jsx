@@ -1,7 +1,7 @@
 import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { getBasket } from '../../store/basket/basketReducer'
+import { getBasket } from '../../store/basket/basketSlice'
 import { BasketButton } from './BasketButton'
 
 export const Header = ({openBasket}) => {
