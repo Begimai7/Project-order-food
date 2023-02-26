@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { useState} from 'react'
-import styled from 'styled-components'
+import styledComponents from 'styled-components'
 import { Button } from '../../UI/Button'
 import { ReactComponent as AddIcon } from '../../../assets/icons/plus-add.svg'
 import { useDispatch } from 'react-redux'
 import { addToBasket } from '../../../store/basket/basketSlice'
+import { IconButton, InputAdornment, TextField } from '@mui/material'
+import { styled } from '@mui/system'
 
 
 export const MealItemForm = ({id, title, price}) => {
@@ -29,17 +31,16 @@ export const MealItemForm = ({id, title, price}) => {
 
   return (
    <FormContainer onSubmit={submitMeals}>
-   <Form>
-    <label htmlFor={id}>Amount</label>
-     <StyledInput
-      type="number" 
-      min={1}
-      defaultValue={1} 
-      id={id}
-      value={amount}
-      onChange={getAmount}
-      />
-   </Form>
+   <InputContainer>
+      <label htmlFor={id}>Amount</label>
+
+         <StyledTextField
+              id={id}
+              type="number"
+              value={amount}
+              onChange={getAmount}
+        />
+   </InputContainer>
  
         <Button onClick={submitMeals}>
         <StyledIcon/>
@@ -49,16 +50,30 @@ export const MealItemForm = ({id, title, price}) => {
   )
 }
 
-const FormContainer = styled.div`
+const StyledTextField = styled(TextField)(() => ({
+  "&": {
+    width: '60px',
+    height: '50px',
+    margin: "5px 10px"
+  },
+  "& .MuiOutlinedInput-input": {
+    padding: "5px 10px",
+    fontSize: "18px",
+    fontWeight: "bold",
+  }
+}))
+
+
+const FormContainer = styledComponents.div`
  display: flex;
  flex-direction: column;
  align-items: flex-end;
  margin: 26px 0 10px;
 `
-const Form = styled.form`
+const InputContainer = styledComponents.form`
    display: flex;
    align-items: center;
-   margin-bottom: 12px ;
+   margin-bottom: 12px;
 
    label{
    font-weight: 600;
@@ -67,19 +82,19 @@ const Form = styled.form`
    color: #222222;
    }
 `
-const StyledInput = styled.input`
-width: 60px;
-height: 32px;
-border: 1px solid #D6D6D6;
-border-radius: 6px;
-padding: 4px 12px;
-margin-left: 20px;
-font-weight: 500;
-font-size: 16px;
-line-height: 24px;
-color: #222222;
-outline: none;
-`
-const StyledIcon =  styled(AddIcon)`
+// const StyledInput = styledComponents.input`
+// width: 60px;
+// height: 32px;
+// border: 1px solid #D6D6D6;
+// border-radius: 6px;
+// padding: 4px 12px;
+// margin-left: 20px;
+// font-weight: 500;
+// font-size: 16px;
+// line-height: 24px;
+// color: #222222;
+// outline: none;
+// `
+const StyledIcon =  styledComponents(AddIcon)`
 margin-right: 20px;
 `

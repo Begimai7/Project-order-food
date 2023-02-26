@@ -4,6 +4,18 @@ import { Button } from "../UI/Button"
 
 export const TotalAmount = ({price, onClose, onOrder}) => {
 
+  const closeBtnStyle = {
+    background: "#fff",
+    color: "#973d19",
+    border: "none",
+    fontWeight: "bold",
+
+     "&:hover": {
+      backgroundColor: "#973d19",
+      color: "#fff"
+    }
+  }
+
  const orderButton = price > 0 && <Button onClick={onOrder}>Order</Button>
 
   return (
@@ -15,7 +27,7 @@ export const TotalAmount = ({price, onClose, onOrder}) => {
     </TotalContainer>
 
     <StyledButtons>
-     <Button variant="outline" onClick={onClose}>Close</Button>
+     <Button style={closeBtnStyle} onClick={onClose}>Close</Button>
      {orderButton}
      </StyledButtons>
 
@@ -24,7 +36,7 @@ export const TotalAmount = ({price, onClose, onOrder}) => {
 }
 
 const TotalAmountStyled = styled.div`
- margin-top: 30px;
+ margin-top: 20px;
 `
 const TotalContainer = styled.div`
  display: flex;
@@ -51,3 +63,5 @@ const StyledButtons = styled.div`
  gap: 1rem;
  margin-top: 24px;
 `
+
+//    <Button variant="outline" onClick={onClose}>Close</Button>

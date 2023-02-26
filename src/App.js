@@ -4,9 +4,12 @@ import { Summery } from "./components/summery/Summery"
 import  Meals  from "./components/meal/Meal"
 import { Basket } from "./components/basket/Basket"
 import styled from 'styled-components';
-import { useCallback, useState } from 'react';
 import { useFoods } from './hooks/useFoods';
-
+import { SnackBar } from './components/UI/SnackBar';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiActions } from './store/ui/uiSlice';
+import { useCallback, useState } from 'react';
+import { MenuItem, Select } from '@mui/material';
 
 // const DUMMY_MEALS = [
 //   {
@@ -35,28 +38,47 @@ import { useFoods } from './hooks/useFoods';
 //   }
 // ]
 
+const OPTIONS = [
+  {value: "ASC", label: "Cheaper"},
+  {value: "DESC", label: "More Expensive"}
+]
+
 function App() {
 const [isBasketVisible, setBasketVisible] = useState(false)
-// const [sortDirection, setSortDirection] = useState(false)
   const {meals, sortDirection, changeSortDirection, isLoading, error} = useFoods()
+
+  const snackbar = useSelector((state) => state.ui.snackbar)
+  const dispatch = useDispatch()
 
 const clickHandler = useCallback(() => {
   setBasketVisible((prevS) => !prevS)
 },[isBasketVisible])
 
+
+//  const clickHandler = () => {
+//   dispatch(modalActions.openModal())
+//  }
+
   return (
    <> 
     <Header openBasket={clickHandler}/>
-    <Content>
+    <Content >
     <Summery />
    
-   <select 
-    onChange={(e) => changeSortDirection(e.target.value)}
+    <StyledSelect
+    labelId="demo-simple-select-label"
+    id="demo-simple-select"
     value={sortDirection}
-    >
-    <option value="ASC">cheaper</option>
-    <option value='DESC'>more expensive</option>
-   </select>
+    label="Age"
+    onChange={(e) => changeSortDirection(e.target.value)}
+  >
+    {
+      OPTIONS.map((item) => (
+         <MenuItem value={item.value}>{item.label}</MenuItem>
+      ))
+    }
+   
+  </StyledSelect>
 
     <Meals meals={meals} isLoading={isLoading} error={error}/>
 
@@ -64,16 +86,32 @@ const clickHandler = useCallback(() => {
       isBasketVisible &&  <Basket onClose={clickHandler}/>
     }
     </Content>
-    
+
+    <SnackBar 
+     isOpen={snackbar.isOpen}
+     message={snackbar.message}
+     severity={snackbar.severity}
+     onClose={() => dispatch(uiActions.closeSnackbar())}
+    />
    </>
   );
 }
 
 export default App;
 
-const Content = styled.div`
-margin-top: 101px;
-`
+// const Content = styled.div`
+// margin-top: 101px;
+// `
+
+const Content = styled("div")(()=> ({
+  marginTop: "101px;"
+}))
+
+const StyledSelect = styled(Select)(()=> ({
+  "&": {
+    backgroundColor: "#fff"
+  }
+}))
 
 // GET /foods
 // Headers: { UserID: "your_name"  } 

@@ -86,6 +86,22 @@ export const updateBasketItem = createAsyncThunk(
   }
  )
 
+export const submitOrder = createAsyncThunk (
+  'basket/submitOrder',
+  async ({orderData}, {dispatch, rejectWithValue}) => {
+    try{
+    await fetchApi("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST", 
+      body: orderData
+    })
+
+    dispatch(getBasket())
+    }catch(error) {
+      rejectWithValue("Wroong")
+    }
+  }
+)
+
 
 // export const getBasket = () => async (dispatch) => {
 //  try{

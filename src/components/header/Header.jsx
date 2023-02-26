@@ -2,6 +2,7 @@ import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { getBasket } from '../../store/basket/basketSlice'
+import { modalActions } from '../../store/ui/modalSlice'
 import { BasketButton } from './BasketButton'
 
 export const Header = ({openBasket}) => {
@@ -14,6 +15,7 @@ export const Header = ({openBasket}) => {
  }, [dispatch])
 
  const totalAmountMeals = () => {
+  dispatch(modalActions.openModal())
   const res = items.reduce((sum, item) => {
     return sum + item.amount
   }, 0)
