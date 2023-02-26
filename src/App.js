@@ -3,13 +3,16 @@ import { Header } from "./components/header/Header"
 import { Summery } from "./components/summery/Summery"
 import  Meals  from "./components/meal/Meal"
 import { Basket } from "./components/basket/Basket"
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { useFoods } from './hooks/useFoods';
 import { SnackBar } from './components/UI/SnackBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { uiActions } from './store/ui/uiSlice';
-import { useCallback, useState } from 'react';
-import { MenuItem, Select } from '@mui/material';
+import { useCallback, useMemo, useState } from 'react';
+import { createTheme, MenuItem, Select, styled, ThemeProvider } from "@mui/material";
+import { darkTheme, lightTheme } from './lib/constants/theme';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 // const DUMMY_MEALS = [
 //   {
@@ -43,11 +46,12 @@ const OPTIONS = [
   {value: "DESC", label: "More Expensive"}
 ]
 
-function App() {
+function AppContent() {
 const [isBasketVisible, setBasketVisible] = useState(false)
   const {meals, sortDirection, changeSortDirection, isLoading, error} = useFoods()
 
   const snackbar = useSelector((state) => state.ui.snackbar)
+  const themeMode = useSelector((state) => state.ui.themeMode)
   const dispatch = useDispatch()
 
 const clickHandler = useCallback(() => {
@@ -59,8 +63,17 @@ const clickHandler = useCallback(() => {
 //   dispatch(modalActions.openModal())
 //  }
 
+ const theme = useMemo(() => {
+  const currentTheme = themeMode === "light" ? { ...lightTheme} : { ...darkTheme}
+
+  return  createTheme(currentTheme)
+}, [themeMode])
+
+
+
   return (
    <> 
+  <ThemeProvider theme={theme}>
     <Header openBasket={clickHandler}/>
     <Content >
     <Summery />
@@ -93,15 +106,21 @@ const clickHandler = useCallback(() => {
      severity={snackbar.severity}
      onClose={() => dispatch(uiActions.closeSnackbar())}
     />
+ </ThemeProvider>     
    </>
   );
 }
 
+const App = () => {
+   return(
+  <Provider store={store}>
+    <AppContent />
+  </Provider>
+   )
+}
+
 export default App;
 
-// const Content = styled.div`
-// margin-top: 101px;
-// `
 
 const Content = styled("div")(()=> ({
   marginTop: "101px;"

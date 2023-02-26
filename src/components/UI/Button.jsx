@@ -26,23 +26,23 @@ export const Button = ({children, variant = "contained", borderSquare = "circle"
 // }
 
 
-const StyledButton = styled(MuiButton)(()=> ({
+const StyledButton = styled(MuiButton)(({theme})=> ({
 "&":{ fontWeight: 500,
 fontSize: "16px",
 lineHeight: "24px",
 textAlign: "center",
-color: "#fff",
-backgroundColor: `#8A2B06`,
+color:  theme.palette.primary.contrastText,
+backgroundColor:  theme.palette.primary.main,
 borderRadius: `20px`,
 padding: "10px 32px",
 display: "flex",
 alignItems: "center",
 },
 "&:hover": {
-  background: "#6d2305",
-  color: "#fff"
+  background:  theme.palette.primary.dark,
+  color:  theme.palette.primary.contrastText
 },
 "&:active": {
-  background: "#993108"
+  background:  theme.palette.primary.light
 }
 }))

@@ -14,23 +14,25 @@ export const BasketButton = ({count , onClick}) => {
   )
 }
 
-const StyledButton = styled(Button)(()=> ({
+const StyledButton = styled(Button)(({ theme })=> ({
 "&": {
 fontWeight: 600,
 fontSize: "16px",
 lineHeight: "24px",
 textAlign: "center",
-color: "#FFFFFF",
+color: theme.palette.primary.contrastText,
 padding: "12px 32px",
-background: "#5A1F08",
+background: theme.palette.primary.dark,
 borderRadius: "30px",
 border: "none",
 display: "flex",
 alignItems: "center",
+marginLeft: "10px",
+
 },
 "&:hover": {
-  background: "#792504",
-  color: "#fff"
+  background: theme.palette.primary.light,
+  color: theme.palette.primary.contrastText
 },
 "& .bump": {
   animation: "bump 300ms ease-out"
@@ -54,55 +56,56 @@ alignItems: "center",
 // }
 }))
 
-const StyledButton2 = styledComponents.button`
-font-weight: 600;
-font-size: 16px;
-line-height: 24px;
-text-align: center;
-color: #FFFFFF;
-padding: 12px 32px;
-background: #5A1F08;
-border-radius: 30px;
-border: none;
-display: flex;
-align-items: center;
-:hover{
- background-color: #2c0d00;
-}
+// const StyledButton2 = styledComponents.button`
+// font-weight: 600;
+// font-size: 16px;
+// line-height: 24px;
+// text-align: center;
+// color: #FFFFFF;
+// padding: 12px 32px;
+// background: #5A1F08;
+// border-radius: 30px;
+// border: none;
+// display: flex;
+// align-items: center;
+// :hover{
+//  background-color: #2c0d00;
+// }
 
-&.bump {
-  animation: bump 300ms ease-out;
-}
+// &.bump {
+//   animation: bump 300ms ease-out;
+// }
 
-@keyframes bump {
-  0% {
-    transform: scale(1);
-  }
-  10% {
-    transform: scale(0.9);
-  }
-  30% {
-    transform: scale(1.1);
-  }
-  50% {
-    transform: scale(1.15);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
+// @keyframes bump {
+//   0% {
+//     transform: scale(1);
+//   }
+//   10% {
+//     transform: scale(0.9);
+//   }
+//   30% {
+//     transform: scale(1.1);
+//   }
+//   50% {
+//     transform: scale(1.15);
+//   }
+//   100% {
+//     transform: scale(1);
+//   }
+// }
 
-`
+// `
 const StyledTitle = styledComponents.span`
 padding-left: 14px;
 padding-right: 24px;
 `
-const StyledCounter = styledComponents.span`
-background: #8A2B06;
-border-radius: 30px;
-font-weight: 700;
-font-size: 20px;
-line-height: 27px;
-color: #FFFFFF;
-padding: 4px 20px;
-`
+const StyledCounter = styled("span")(({ theme })=> ({
+  background: theme.palette.primary.main,
+  borderRadius: "30px",
+  fontWeight: 700,
+  fontSize: "20px",
+  lineHeight: "27px",
+  color: theme.palette.primary.contrastText,
+  padding: "4px 20px",
+
+}))

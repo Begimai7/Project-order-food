@@ -1,5 +1,6 @@
+import { styled } from '@mui/material'
 import React from 'react'
-import styled from 'styled-components'
+import styledComponents from 'styled-components'
 import { Button } from "../UI/Button"
 
 export const TotalAmount = ({price, onClose, onOrder}) => {
@@ -35,14 +36,14 @@ export const TotalAmount = ({price, onClose, onOrder}) => {
   )
 }
 
-const TotalAmountStyled = styled.div`
+const TotalAmountStyled = styledComponents.div`
  margin-top: 20px;
 `
-const TotalContainer = styled.div`
+const TotalContainer = styledComponents.div`
  display: flex;
  justify-content: space-between;
 `
-const Label = styled.p`
+const Label = styledComponents.p`
 font-weight: 700;
 font-size: 20px;
 line-height: 30px;
@@ -50,14 +51,14 @@ text-align: center;
 color: #222222;
 padding: 0;
 `
-const Price = styled.p`
-font-weight: 600;
-font-size: 22px;
-line-height: 33px;
-color: #8A2B06;
-padding: 0;
-`
-const StyledButtons = styled.div`
+const Price = styled('p')(({ theme})=> ({
+  fontWeight: 600,
+  fontSize: "22px",
+  lineHeight: "33px",
+  color: theme.palette.primary.main,
+  padding: "0"
+}))
+const StyledButtons = styledComponents.div`
  display: flex;
  justify-content: flex-end;
  gap: 1rem;

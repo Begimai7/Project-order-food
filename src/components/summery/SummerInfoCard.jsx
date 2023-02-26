@@ -1,5 +1,6 @@
+import { styled } from '@mui/material'
 import React from 'react'
-import styled from 'styled-components'
+import styledComponents from 'styled-components'
 
 export const SummerInfoCard = () => {
   return (
@@ -12,27 +13,28 @@ export const SummerInfoCard = () => {
     </Card>
   )
 }
-const Card = styled.div`
- position: relative;
- top: -12rem;
- margin: 0 auto;
- width: 857px;
- background: #383838;
- box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
- border-radius: 16px;
- padding: 36px 40px 16px 40px;
- color: #fff;
- text-align: center;
- font-weight: 500;
- font-size: 16px;
- line-height: 24px;
- text-align: center;
+const Card = styled('div')(({ theme })=> ({
+position: "relative",
+ top: "-12rem",
+ margin: "0 auto",
+ width: "857px",
+ background: theme.palette.secondary.main,
+ boxShadow: "0px 6px 16px rgba(0, 0, 0, 0.3)",
+ borderRadius: "16px",
+ padding: "36px 40px 16px 40px",
+ color: theme.palette.secondary.contrastText,
+ textAlign: "center",
+ fontWeight: 500,
+ fontSize: "16px",
+ lineHeight: "24px",
+ textAlign: "center",
   
-  p{
-    margin-bottom: 20px;
+  "p": {
+    marginBottom: "20px"
   }
-`
-const StyledTitle = styled.h1`
+}))
+ 
+const StyledTitle = styledComponents.h1`
  font-weight: 600;
  font-size: 36px;
  line-height: 54px;

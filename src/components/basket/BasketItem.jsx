@@ -33,13 +33,14 @@ line-height: 30px;
 color: #222222;
 margin: 0 0 12px 0;
 `
-const Price = styledComponents.p`
-font-weight: 600;
-font-size: 18px;
-line-height: 27px;
-color: #AD5502;
-margin: 0;
-`
+const Price = styled("p")(({ theme })=> ({
+  fontWeight: 600,
+  fontSize: "18px",
+  lineHeight: "27px",
+  color:  theme.palette.primary.main,
+  margin: 0,
+}))
+
 const Amount = styledComponents.span`
 border: 1px solid #D6D6D6;
 border-radius: 6px;
@@ -68,13 +69,13 @@ const ButtonsContainer = styledComponents.div`
  gap: 14px;
 `
 
-const StyledButton = styled(MuiButton)(()=> ({
+const StyledButton = styled(MuiButton)(({ theme})=> ({
   "&":{ 
   fontSize: "18px",
   fontWeight: "600",
   lineHeight: "24px",
   textAlign: "center",
-  color: "#7E2A0A",
+  color: theme.palette.primary.main,
   borderRadius: `6px`,
   border:  "1px solid #8A2B06",
   padding: "10px 32px",
@@ -82,11 +83,11 @@ const StyledButton = styled(MuiButton)(()=> ({
   alignItems: "center",
   },
   "&:hover": {
-    backgroundColor: "#973d19",
-    color: "#fff"
+    backgroundColor: theme.palette.primary.dark,
+    color: theme.palette.primary.contrastText
   },
   "& :active": {
-    background: "#993108"
+    background: theme.palette.primary.light,
   }
   }))
 
