@@ -5,7 +5,7 @@ import { getMeals } from "../store/meals/mealsSlice"
 export const useFoods =  () => {
  const dispatch = useDispatch()
  const [sortDirection, setSortDirection] = useState("ASC")
-const {meals, isLoading, error} = useSelector((state) => state.meals)
+const {meals = '', isLoading, error} = useSelector((state) => state.meals)
 
  useEffect(() => {
   dispatch(getMeals())
@@ -15,8 +15,9 @@ const {meals, isLoading, error} = useSelector((state) => state.meals)
   setSortDirection(dir)
  }
 
+ 
  const sortedMeals = useMemo(() => {
-  const notSorted = [ ...meals];
+  const notSorted = [...meals];
 
   return notSorted.sort((a, b) => {
    if(sortDirection === "ASC"){

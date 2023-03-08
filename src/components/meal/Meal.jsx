@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { MealItem } from './meal-item/MealItem'
 
  const Meals = ({ meals, isLoading, error}) => {
+
   // const [meals, setMeals] = useState([])
   // const [error, setError] = useState("")
 

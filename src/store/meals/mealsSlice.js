@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { fetchApi } from "../../lib/fetchApi"
-
+import { getMealsRequest } from "../../api/mealsServive"
+// import { fetchApi } from "../../lib/fetchApi"
 
 const initialState = {
  meals: [],
@@ -25,9 +25,9 @@ export const mealsSlice = createSlice({
   })
 
   builder.addCase(getMeals.rejected, (state, action) => {
-    state.meals = action.payload
+  
     state.isLoading = false
-    state.error = action.payload
+    // state.error = action.payload
   })
  }
 })
@@ -37,13 +37,16 @@ export const mealsAction = mealsSlice.actions
 
 
 
+
+
+
 export const getMeals = createAsyncThunk(
   'meals/getMeals',
-  async(payload, {dispatch, rejectWithValue}) => {
+  async( { rejectWithValue}) => {
   
    try{
 
-   const { data } = await fetchApi("foods");
+   const { data } = await getMealsRequest();
 
    return data
 
@@ -53,18 +56,3 @@ export const getMeals = createAsyncThunk(
   }
 )
 
-// export const getMeals = () => {
-
-//   return async (dispatch, getState) =>{
-//     try{
-//       dispatch(mealsAction.getMealsStart())
-
-//       const {data} = await fetchApi("foods");
-
-//       dispatch(mealsAction.getMealsSuccess(data))
-//     }
-//     catch(error) {
-//       dispatch(mealsAction.getMealsFailed())
-//     }
-//   }
-// }

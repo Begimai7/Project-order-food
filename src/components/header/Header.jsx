@@ -1,14 +1,21 @@
 import { Button as MuiButton, styled } from '@mui/material'
 import React, {  useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styledComponents from 'styled-components'
 import { getBasket } from '../../store/basket/basketSlice'
+// import { getBasket } from '../../store/basket/basketSlice'
 import { modalActions } from '../../store/ui/modalSlice'
 import { uiActions } from '../../store/ui/uiSlice'
 import { BasketButton } from './BasketButton'
 
+
 export const Header = ({openBasket}) => {
-  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const isAuthorized = useSelector((state)=> state.auth.isAuthorized)
+
+
+ const dispatch = useDispatch()
  const items = useSelector((state) => state.basket.items)
  const [animationClass, setAnimationClass] = useState("")
 
@@ -20,7 +27,7 @@ export const Header = ({openBasket}) => {
 
  const totalAmountMeals = () => {
   dispatch(modalActions.openModal())
-  const res = items.reduce((sum, item) => {
+  const res = +items.reduce((sum, item) => {
     return sum + item.amount
   }, 0)
   return res
@@ -36,6 +43,10 @@ useEffect(() => {
      clearTimeout(id)
     }
    }, 300)
+
+   return() => {
+    clearTimeout(id)
+   }
 }, [items])
 
 const changeThemeHandler = () => {
@@ -44,8 +55,11 @@ const theme = themeMode === "light" ? "dark" : "light"
   dispatch(uiActions.changeTheme(theme))
 }
 
+const goToSignIn = () => {
+  navigate("/signin")
+}
+
   return (
-    
     <Container>
       <Logo href="/">ReactMeals</Logo>
       <HeaderActions>
@@ -59,6 +73,12 @@ const theme = themeMode === "light" ? "dark" : "light"
         themeMode ==="light" ? "Dark mode" : "Light mode"
        }
        </Button>
+
+       {
+        isAuthorized ? <Button onClick={goToSignIn}>Sign out</Button> : <Button onClick={goToSignIn}>Sign in</Button>
+       }
+       
+       
       </HeaderActions>
       
     </Container>
