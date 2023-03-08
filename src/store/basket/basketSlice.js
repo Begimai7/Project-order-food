@@ -96,18 +96,8 @@ export const getBasket = createAsyncThunk('basket/getBasket', async(payload , {d
  }
  })
 
-// import { createSlice } from "@reduxjs/toolkit"
-// // import { fetchApi } from "../../lib/fetchApi"
 
-// const initialState = {
-//  items: [],
-//  error: ''
-// }
 
-// export const basketSlice = createSlice({
-//   name: "basket",
-//   initialState,
-//   reducers: {},
 
 //   extraReducers: (builder) => {
 //   builder.addCase(getBasket.fulfilled, (state, action) => {
